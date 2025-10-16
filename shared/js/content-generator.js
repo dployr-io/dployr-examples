@@ -1,149 +1,178 @@
 /**
- * Dployr Times - Content Generation Utilities
- * Provides functions for generating random newspaper content
+ * Content Generation Utilities for Dployr Times
+ * Generates random newspaper content including headlines, articles, facts, and classified ads
  */
 
 class ContentGenerator {
     constructor() {
-        this.headlines = [
-            "Breaking: {adjective} {noun} {verb} in {location}",
-            "{location} Officials Announce {adjective} {noun} Initiative",
-            "Local {noun} {verb} After {adjective} Discovery",
-            "{adjective} {noun} Causes Stir in {location}",
-            "Experts Predict {adjective} Changes to {noun}",
-            "{location} Residents React to {adjective} {noun}",
-            "New Study Reveals {adjective} Truth About {noun}",
-            "{adjective} {noun} Sparks Debate Among {location} Leaders"
-        ];
-
+        // Word banks for headline generation
         this.adjectives = [
-            "Revolutionary", "Mysterious", "Unprecedented", "Controversial", "Remarkable",
-            "Shocking", "Innovative", "Unexpected", "Dramatic", "Significant",
-            "Extraordinary", "Surprising", "Historic", "Groundbreaking", "Unusual"
+            'Breaking', 'Shocking', 'Unprecedented', 'Historic', 'Dramatic', 'Surprising',
+            'Revolutionary', 'Controversial', 'Mysterious', 'Urgent', 'Critical', 'Major',
+            'Exclusive', 'Developing', 'Emergency', 'Spectacular', 'Bizarre', 'Incredible'
         ];
 
         this.nouns = [
-            "Technology", "Discovery", "Policy", "Event", "Development", "Research",
-            "Initiative", "Program", "Project", "Study", "Investigation", "Report",
-            "Announcement", "Decision", "Agreement", "Partnership", "Innovation"
+            'Discovery', 'Investigation', 'Announcement', 'Development', 'Crisis', 'Breakthrough',
+            'Scandal', 'Revolution', 'Innovation', 'Conspiracy', 'Phenomenon', 'Incident',
+            'Achievement', 'Disaster', 'Victory', 'Defeat', 'Alliance', 'Conflict'
         ];
 
         this.verbs = [
-            "Emerges", "Transforms", "Revolutionizes", "Impacts", "Changes",
-            "Influences", "Affects", "Improves", "Challenges", "Disrupts",
-            "Advances", "Evolves", "Develops", "Progresses", "Succeeds"
+            'Rocks', 'Shakes', 'Transforms', 'Disrupts', 'Challenges', 'Revolutionizes',
+            'Threatens', 'Promises', 'Delivers', 'Exposes', 'Reveals', 'Uncovers',
+            'Dominates', 'Conquers', 'Inspires', 'Terrifies', 'Amazes', 'Confounds'
         ];
 
         this.locations = [
-            "Downtown", "City Center", "Local Community", "Regional Area", "Metropolitan District",
-            "Urban Center", "Suburban Area", "Business District", "Historic Quarter", "Innovation Hub",
-            "Cultural District", "Academic Zone", "Commercial Area", "Residential Sector", "Tech Corridor"
+            'Silicon Valley', 'Wall Street', 'Washington D.C.', 'New York', 'Los Angeles',
+            'London', 'Tokyo', 'Berlin', 'Paris', 'Sydney', 'Toronto', 'Miami',
+            'Chicago', 'Boston', 'Seattle', 'Austin', 'Denver', 'Atlanta'
         ];
 
+        this.categories = [
+            'Politics', 'Technology', 'Business', 'Sports', 'Entertainment', 'Science',
+            'Health', 'Environment', 'Education', 'Travel', 'Food', 'Fashion'
+        ];
+
+        // Facts and classified ads templates
         this.facts = [
-            "Did you know? The average person spends 7 years of their life in meetings.",
-            "Fun fact: Honey never spoils. Archaeologists have found edible honey in ancient tombs.",
-            "Interesting: A group of flamingos is called a 'flamboyance'.",
-            "Amazing: The human brain uses 20% of the body's total energy.",
-            "Surprising: Bananas are berries, but strawberries aren't.",
-            "Cool fact: A day on Venus is longer than its year.",
-            "Did you know? Octopuses have three hearts and blue blood.",
-            "Fun fact: The shortest war in history lasted only 38-45 minutes.",
-            "Interesting: A shrimp's heart is in its head.",
-            "Amazing: There are more possible games of chess than atoms in the universe."
+            'Did you know that octopuses have three hearts?',
+            'Honey never spoils - archaeologists have found edible honey in ancient Egyptian tombs.',
+            'A group of flamingos is called a "flamboyance".',
+            'Bananas are berries, but strawberries aren\'t.',
+            'The shortest war in history lasted only 38-45 minutes.',
+            'Wombat droppings are cube-shaped.',
+            'There are more possible games of chess than atoms in the observable universe.',
+            'Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid.',
+            'A single cloud can weigh more than a million pounds.',
+            'Sharks have been around longer than trees.'
         ];
 
-        this.classifieds = [
-            "FOR SALE: Vintage typewriter, barely used. Perfect for aspiring journalists. $50 OBO.",
-            "WANTED: Someone to teach my cat to use a computer. Serious inquiries only.",
-            "LOST: My sense of direction. If found, please return immediately.",
-            "FOR RENT: Cozy apartment with great view of neighbor's garden gnomes.",
-            "SERVICES: Professional procrastinator available. Will start tomorrow.",
-            "WANTED: Time machine. Prefer recent model with good mileage.",
-            "FOR SALE: Dictionary with missing words. Indescribable condition.",
-            "SERVICES: Invisible man seeks work. References available upon request.",
-            "LOST: Motivation. Last seen Monday morning. Reward if found.",
-            "FOR SALE: Parachute. Used once, never opened. Small stain."
-        ];
-
-        this.bodyTemplates = [
-            "In a {adjective} turn of events, local authorities have confirmed that {details}. The situation has prompted {reaction} from community leaders who describe it as {impact}. Officials expect {outcome} within the coming weeks.",
-            "Residents of {location} were {emotion} to learn about {event}. According to {source}, this development represents {significance}. The {authority} has announced plans to {action} in response to growing concerns.",
-            "A recent {type} has revealed {finding} that could {consequence}. Experts believe this {discovery} will {effect} the way we understand {subject}. The research team plans to {next_step} their investigation.",
-            "Local {organization} announced today that {announcement}. This {adjective} decision comes after months of {process} and is expected to {result}. Community members have expressed {sentiment} about the changes."
+        this.classifiedAds = [
+            'FOR SALE: Time machine, slightly used. Only went back once. $5,000 OBO.',
+            'LOST: My mind. If found, please return immediately. Reward: Sanity.',
+            'WANTED: Someone to go back in time with me. Safety not guaranteed.',
+            'FREE: Invisible dog. Great personality, house trained.',
+            'FOR RENT: Haunted mansion. Ghosts included. No pets allowed (they scare the spirits).',
+            'SEEKING: Professional procrastinator. Will interview candidates next week.',
+            'FOUND: Keys to success. Owner must identify which door they open.',
+            'FOR SALE: Parachute, never opened. Small stain. Best offer.',
+            'WANTED: Telekinetic. You know where to find me.',
+            'FREE: Advice. Warning: You get what you pay for.'
         ];
     }
 
     /**
      * Generate a random headline using templates
+     * @returns {string} Generated headline
      */
     generateHeadline() {
-        const template = this.getRandomItem(this.headlines);
-        return template
-            .replace('{adjective}', this.getRandomItem(this.adjectives))
-            .replace('{noun}', this.getRandomItem(this.nouns))
-            .replace('{verb}', this.getRandomItem(this.verbs))
-            .replace('{location}', this.getRandomItem(this.locations));
+        const templates = [
+            () => `${this.getRandomItem(this.adjectives)} ${this.getRandomItem(this.nouns)} ${this.getRandomItem(this.verbs)} ${this.getRandomItem(this.locations)}`,
+            () => `Local ${this.getRandomItem(this.nouns)} ${this.getRandomItem(this.verbs)} ${this.getRandomItem(this.locations)} Community`,
+            () => `${this.getRandomItem(this.adjectives)} ${this.getRandomItem(this.categories)} ${this.getRandomItem(this.nouns)} Leaves Experts Baffled`,
+            () => `Scientists Discover ${this.getRandomItem(this.adjectives)} ${this.getRandomItem(this.nouns)} in ${this.getRandomItem(this.locations)}`,
+            () => `${this.getRandomItem(this.locations)} Mayor Announces ${this.getRandomItem(this.adjectives)} ${this.getRandomItem(this.nouns)}`,
+        ];
+
+        const template = this.getRandomItem(templates);
+        return template();
     }
 
     /**
-     * Generate random body text for articles
+     * Generate random image URL from picsum.photos
+     * @param {number} width - Image width (default: 400)
+     * @param {number} height - Image height (default: 300)
+     * @returns {string} Image URL
      */
-    generateBodyText() {
-        const template = this.getRandomItem(this.bodyTemplates);
-        const fillers = {
-            adjective: this.getRandomItem(this.adjectives).toLowerCase(),
-            location: this.getRandomItem(this.locations),
-            details: "the situation requires immediate attention and careful consideration",
-            reaction: "mixed reactions",
-            impact: "both challenging and promising",
-            outcome: "significant improvements",
-            emotion: "surprised",
-            event: "recent developments",
-            source: "reliable sources",
-            significance: "a major milestone",
-            authority: "city council",
-            action: "implement new measures",
-            type: "comprehensive study",
-            finding: "important insights",
-            consequence: "change current practices",
-            discovery: "breakthrough",
-            effect: "fundamentally alter",
-            subject: "community development",
-            next_step: "expand",
-            organization: "planning committee",
-            announcement: "new initiatives will be launched",
-            process: "careful deliberation",
-            result: "benefit all residents",
-            sentiment: "cautious optimism"
-        };
-
-        let result = template;
-        Object.keys(fillers).forEach(key => {
-            result = result.replace(new RegExp(`{${key}}`, 'g'), fillers[key]);
-        });
-
-        return result;
+    generateImageUrl(width = 400, height = 300) {
+        const seed = Math.floor(Math.random() * 1000);
+        return `https://picsum.photos/${width}/${height}?random=${seed}`;
     }
 
     /**
-     * Generate a random image URL from picsum.photos
+     * Generate random author image URL from thispersondoesnotexist.com
+     * @returns {string} Author image URL
      */
-    generateImageUrl(width = 400, height = 300, seed = null) {
-        const randomSeed = seed || Math.floor(Math.random() * 1000);
-        return `https://picsum.photos/${width}/${height}?random=${randomSeed}`;
+    generateAuthorImageUrl() {
+        const seed = Math.floor(Math.random() * 100000);
+        return `https://thispersondoesnotexist.com/image?${seed}`;
     }
 
     /**
-     * Generate a random author image URL
+     * Generate fake news body text with Lorem Ipsum fallback
+     * @param {number} paragraphs - Number of paragraphs (default: 3)
+     * @returns {string} Generated body text
      */
-    generateAuthorImageUrl(seed = null) {
-        const randomSeed = seed || Math.floor(Math.random() * 1000);
-        return `https://thispersondoesnotexist.com/image?${randomSeed}`;
+    generateBodyText(paragraphs = 3) {
+        const newsStarters = [
+            'In a surprising turn of events,',
+            'Local authorities report that',
+            'According to recent studies,',
+            'Witnesses claim that',
+            'Officials have confirmed that',
+            'Sources close to the matter reveal',
+            'Breaking news indicates that',
+            'Experts are saying that'
+        ];
+
+        const newsMiddle = [
+            'the situation has escalated beyond expectations',
+            'community members are rallying together',
+            'new evidence has come to light',
+            'the impact will be felt for years to come',
+            'stakeholders are calling for immediate action',
+            'the discovery has shocked researchers',
+            'public opinion remains divided on the matter',
+            'the investigation is ongoing'
+        ];
+
+        const newsEnders = [
+            'More details will be released as they become available.',
+            'The story continues to develop.',
+            'Officials urge the public to remain calm.',
+            'Further investigation is expected.',
+            'Community leaders are scheduled to meet next week.',
+            'The full impact remains to be seen.',
+            'Authorities are asking for public assistance.',
+            'Updates will follow in the coming days.'
+        ];
+
+        const loremIpsum = [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+            'Duis aute irure dolor in reprehenderit in voluptate velit esse.',
+            'Excepteur sint occaecat cupidatat non proident, sunt in culpa.',
+            'Qui officia deserunt mollit anim id est laborum.'
+        ];
+
+        let result = [];
+
+        for (let i = 0; i < paragraphs; i++) {
+            let paragraph;
+
+            // Try to generate news-like content first
+            if (Math.random() > 0.3) { // 70% chance for news-like content
+                const starter = this.getRandomItem(newsStarters);
+                const middle = this.getRandomItem(newsMiddle);
+                const ender = this.getRandomItem(newsEnders);
+                paragraph = `${starter} ${middle}. ${ender}`;
+            } else {
+                // Fallback to Lorem Ipsum
+                paragraph = this.getRandomItem(loremIpsum);
+            }
+
+            result.push(paragraph);
+        }
+
+        return result.join('\n\n');
     }
 
     /**
-     * Generate a random fact for the sidebar
+     * Generate a random fact
+     * @returns {string} Random fact
      */
     generateRandomFact() {
         return this.getRandomItem(this.facts);
@@ -151,31 +180,66 @@ class ContentGenerator {
 
     /**
      * Generate a random classified ad
+     * @returns {string} Random classified ad
      */
     generateClassifiedAd() {
-        return this.getRandomItem(this.classifieds);
+        return this.getRandomItem(this.classifiedAds);
+    }
+
+    /**
+     * Generate multiple random facts
+     * @param {number} count - Number of facts to generate
+     * @returns {Array<string>} Array of random facts
+     */
+    generateRandomFacts(count = 3) {
+        const selectedFacts = [];
+        const availableFacts = [...this.facts];
+
+        for (let i = 0; i < Math.min(count, availableFacts.length); i++) {
+            const index = Math.floor(Math.random() * availableFacts.length);
+            selectedFacts.push(availableFacts.splice(index, 1)[0]);
+        }
+
+        return selectedFacts;
+    }
+
+    /**
+     * Generate multiple random classified ads
+     * @param {number} count - Number of ads to generate
+     * @returns {Array<string>} Array of random classified ads
+     */
+    generateClassifiedAds(count = 3) {
+        const selectedAds = [];
+        const availableAds = [...this.classifiedAds];
+
+        for (let i = 0; i < Math.min(count, availableAds.length); i++) {
+            const index = Math.floor(Math.random() * availableAds.length);
+            selectedAds.push(availableAds.splice(index, 1)[0]);
+        }
+
+        return selectedAds;
     }
 
     /**
      * Generate a complete article object
+     * @returns {Object} Complete article with all properties
      */
-    generateArticle(id = null) {
-        const articleId = id || this.generateId();
-        const seed = this.hashCode(articleId);
-
+    generateArticle() {
         return {
-            id: articleId,
+            id: this.generateId(),
             title: this.generateHeadline(),
-            image: this.generateImageUrl(400, 300, seed),
-            author_image: this.generateAuthorImageUrl(seed),
+            image: this.generateImageUrl(),
+            author_image: this.generateAuthorImageUrl(),
             body: this.generateBodyText(),
-            category: this.getRandomItem(['Politics', 'Technology', 'Sports', 'Culture', 'Business']),
+            category: this.getRandomItem(this.categories),
             timestamp: new Date().toISOString()
         };
     }
 
     /**
      * Generate multiple articles
+     * @param {number} count - Number of articles to generate (default: 4)
+     * @returns {Array<Object>} Array of article objects
      */
     generateArticles(count = 4) {
         const articles = [];
@@ -186,77 +250,34 @@ class ContentGenerator {
     }
 
     /**
-     * Generate sidebar content
+     * Generate a unique ID
+     * @returns {string} Unique identifier
      */
-    generateSidebarContent() {
-        return {
-            facts: [
-                this.generateRandomFact(),
-                this.generateRandomFact(),
-                this.generateRandomFact()
-            ],
-            classifieds: [
-                this.generateClassifiedAd(),
-                this.generateClassifiedAd(),
-                this.generateClassifiedAd()
-            ]
-        };
+    generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
     }
 
     /**
-     * Generate complete page content
-     */
-    generatePageContent() {
-        const heroArticle = this.generateArticle('hero');
-        const articles = this.generateArticles(4);
-        const sidebar = this.generateSidebarContent();
-
-        return {
-            hero: heroArticle,
-            articles: articles,
-            sidebar: sidebar,
-            generated_at: new Date().toISOString()
-        };
-    }
-
-    /**
-     * Utility: Get random item from array
+     * Get random item from array
+     * @param {Array} array - Array to select from
+     * @returns {*} Random item from array
      */
     getRandomItem(array) {
         return array[Math.floor(Math.random() * array.length)];
     }
 
     /**
-     * Utility: Generate unique ID
+     * Generate random number between min and max (inclusive)
+     * @param {number} min - Minimum value
+     * @param {number} max - Maximum value
+     * @returns {number} Random number
      */
-    generateId() {
-        return Math.random().toString(36).substr(2, 9);
-    }
-
-    /**
-     * Utility: Generate hash code from string (for consistent seeding)
-     */
-    hashCode(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            const char = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash; // Convert to 32-bit integer
-        }
-        return Math.abs(hash) % 1000;
-    }
-
-    /**
-     * Mock API endpoint for static version
-     */
-    mockApiGenerate() {
-        return {
-            articles: this.generateArticles(Math.floor(Math.random() * 3) + 3) // 3-5 articles
-        };
+    getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
 
-// Export for use in different environments
+// Export for both Node.js and browser environments
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ContentGenerator;
 } else if (typeof window !== 'undefined') {
