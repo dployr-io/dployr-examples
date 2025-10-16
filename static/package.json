@@ -1,0 +1,24 @@
+{
+  "name": "dployr-times-static",
+  "version": "1.0.0",
+  "description": "Static HTML/JavaScript implementation of The Dployr Times newspaper application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "static",
+    "html",
+    "javascript",
+    "newspaper",
+    "demo",
+    "dployr"
+  ],
+  "author": "Dployr",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

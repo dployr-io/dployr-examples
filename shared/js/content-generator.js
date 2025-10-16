@@ -275,6 +275,35 @@ class ContentGenerator {
     getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+    /**
+     * Generate complete page content for static version
+     * @returns {Object} Complete page content object
+     */
+    generatePageContent() {
+        const articleCount = this.getRandomNumber(3, 5);
+        const articles = this.generateArticles(articleCount);
+        const heroArticle = this.generateArticle();
+        const facts = this.generateRandomFacts(4);
+        const classifieds = this.generateClassifiedAds(3);
+
+        return {
+            success: true,
+            articles: articles,
+            hero: {
+                title: heroArticle.title,
+                body: heroArticle.body.split('\n\n')[0], // First paragraph only for hero
+                image: heroArticle.image,
+                author_image: heroArticle.author_image,
+                timestamp: heroArticle.timestamp
+            },
+            sidebar: {
+                facts: facts,
+                classifieds: classifieds
+            },
+            generated_at: new Date().toISOString()
+        };
+    }
 }
 
 // Export for both Node.js and browser environments
