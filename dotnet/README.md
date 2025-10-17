@@ -1,4 +1,4 @@
-# ASP.NET Core 8 Blazor Implementation
+# Old County Times - .NET Edition
 
 This directory contains the ASP.NET Core 8 Blazor version of the Old County Times newspaper application.
 
