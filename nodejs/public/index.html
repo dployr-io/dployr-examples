@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old County Times</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/old-english-five');
+
+        body {
+            font-family: 'Crimson Text', serif;
+
+            margin: 0;
+            padding: 20px;
+            color: #1a1a1a;
+        }
+
+        .newsletter {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 50px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .title {
+            font-family: 'Old English Five', sans-serif;
+            font-size: 52px;
+            text-align: center;
+            margin: 30px 0;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #333;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .meeting-photo {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        .caption {
+            text-align: center;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .column {
+            padding-right: 15px;
+        }
+
+        .column:last-child {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+            padding-right: 0;
+        }
+
+        .joke-lines {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .note {
+            font-size: 15px;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        .comic-strip {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        .comic-caption {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .contribute {
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .newsletter {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column:last-child {
+                border-left: none;
+                border-top: 2px solid #333;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="newsletter">
+        <div class="header">
+            <div></div>
+            <div></div>
+        </div>
+
+        <hr>
+
+        <h1 class="title"></h1>
+
+        <hr>
+
+        <h2></h2>
+
+        <p></p>
+
+        <img src="" alt="" class="meeting-photo">
+
+        <div class="caption"></div>
+
+        <hr>
+
+        <div class="two-column">
+            <div class="column">
+                <h2></h2>
+                <p></p>
+            </div>
+
+            <div class="column">
+                <h2></h2>
+                <p></p>
+                <div class="joke-lines"></div>
+                <p class="note"></p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2></h2>
+
+        <img src="" alt="" class="comic-strip">
+
+        <div class="comic-caption"></div>
+
+        <hr>
+
+        <div class="contribute">
+            <h2></h2>
+
+            <p></p>
+
+            <p></p>
+        </div>
+    </div>
+
+    <script src="js/newsletter-data-dynamic.js"></script>
+    <script src="js/newsletter-app.js"></script>
+    <script>
+        // Make the app instance globally available for dynamic updates
+        window.app = app;
+    </script>
+</body>
+
+</html>
