@@ -1,3 +1,3 @@
-# PHP Implementation
+# Old County Times - Php Edition
 
-This directory contains the PHP version of the Dployr Times newspaper application.
+A simple dynamic newspaper generator built with php. Identical to the static version but with content that regenerates every minute.
