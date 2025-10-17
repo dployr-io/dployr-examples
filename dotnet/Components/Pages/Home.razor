@@ -1,0 +1,95 @@
+﻿@page "/"
+@using OldCountyTimes.Models
+@using OldCountyTimes.Services
+@inject NewsletterUpdateService NewsletterService
+@implements IDisposable
+
+<PageTitle>Old County Times</PageTitle>
+
+<div class="newsletter">
+    <div class="header">
+        <div>@_newsletterData.Header.Edition</div>
+        <div>@_newsletterData.Header.Date</div>
+    </div>
+
+    <hr>
+
+    <h1 class="title">@_newsletterData.Title</h1>
+
+    <hr>
+
+    <h2>@_newsletterData.MainArticle.Title</h2>
+
+    <p>@_newsletterData.MainArticle.Content</p>
+
+    <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&h=400&fit=crop" 
+         alt="Company meeting - 80s style" class="meeting-photo">
+
+    <div class="caption">@_newsletterData.MainArticle.ImageCaption</div>
+
+    <hr>
+
+    <div class="two-column">
+        <div class="column">
+            <h2>@_newsletterData.LeftColumn.Title</h2>
+            <p>@_newsletterData.LeftColumn.Content</p>
+        </div>
+
+        <div class="column">
+            <h2>@_newsletterData.RightColumn.Title</h2>
+            <p>@_newsletterData.RightColumn.Content</p>
+            <div class="joke-lines">
+                @foreach (var line in _newsletterData.RightColumn.JokeLines)
+                {
+                    @line<br>
+                }
+            </div>
+            <p class="note">@_newsletterData.RightColumn.Note</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>@_newsletterData.ComicSection.Title</h2>
+
+    <img src="img/001.jpg" alt="Comic strip of the month" class="comic-strip">
+
+    <div class="comic-caption">@_newsletterData.ComicSection.Caption</div>
+
+    <hr>
+
+    <div class="contribute">
+        <h2>@_newsletterData.ContributeSection.Title</h2>
+        @foreach (var paragraph in _newsletterData.ContributeSection.Paragraphs)
+        {
+            <p>@paragraph</p>
+        }
+    </div>
+</div>
+
+@code {
+    private NewsletterData _newsletterData = new();
+    private Timer? _timer;
+
+    protected override void OnInitialized()
+    {
+        _newsletterData = NewsletterService.CurrentData;
+        
+        // Update every minute
+        _timer = new Timer(UpdateContent, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+    }
+
+    private void UpdateContent(object? state)
+    {
+        InvokeAsync(() =>
+        {
+            _newsletterData = NewsletterService.CurrentData;
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}
