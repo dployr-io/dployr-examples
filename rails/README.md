@@ -1,3 +1,3 @@
-# Ruby on Rails Implementation
+# Old County Times - Rails Edition
 
-This directory contains the Ruby on Rails version of the Dployr Times newspaper application.
+A simple dynamic newspaper generator built with rails. Identical to the static version but with content that regenerates every minute.
