@@ -1,3 +1,3 @@
-# Go Implementation
+# Old County Times - Go Edition
 
-This directory contains the Go version of the Dployr Times newspaper application.
+A simple dynamic newspaper generator built with Go. Identical to the static version but with content that regenerates every minute.
