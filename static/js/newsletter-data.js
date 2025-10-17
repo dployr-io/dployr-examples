@@ -31,7 +31,7 @@ const newsletterData = {
 
     comicSection: {
         title: "Comic strip of the month",
-        caption: "Font: Peru For Less, 2014"
+        caption: "Caption: Special thanks to Bia Franzoli for their amazing newspaper design inspiration"
     },
 
     contributeSection: {
