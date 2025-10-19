@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"path/filepath"
 	"time"
 )
@@ -222,8 +223,10 @@ func main() {
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir(filepath.Join(staticDir, "js")))))
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir(filepath.Join(staticDir, "img")))))
 
-	// Start server
-	port := "3000"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
 	log.Printf("Old County Times Go server running on http://localhost:%s", port)
 	log.Println("Content will be regenerated every minute")
 
