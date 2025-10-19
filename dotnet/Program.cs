@@ -1,7 +1,13 @@
 using OldCountyTimes.Components;
 using OldCountyTimes.Services;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load(); 
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -29,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 // Remove HTTPS redirection to run on port 3000
 // app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 app.UseAntiforgery();
 
 // Map API controllers
