@@ -33,6 +33,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <groupId>me.paulschwarz</groupId>
+            <artifactId>spring-dotenv</artifactId>
+        <version>4.0.0</version>
     </dependencies>
 
     <build>
