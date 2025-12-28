@@ -8,12 +8,19 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^4.18.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["newspaper", "demo", "express", "dployr"],
+  "keywords": [
+    "newspaper",
+    "demo",
+    "express",
+    "dployr",
+    "deployment"
+  ],
   "author": "Dployr",
   "license": "MIT"
 }
