@@ -8,8 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
-	"path/filepath"
-	"time"
+"time"
 )
 
 // NewsletterData represents the structure of newsletter content
@@ -218,10 +217,7 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/api/newsletter-data", apiHandler)
 
-	// Serve static files from the static directory
-	staticDir := filepath.Join("..", "static")
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir(filepath.Join(staticDir, "js")))))
-	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir(filepath.Join(staticDir, "img")))))
+	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 
 	port := os.Getenv("PORT")
 	if port == "" {
