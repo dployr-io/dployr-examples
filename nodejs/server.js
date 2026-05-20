@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../static')));
 
 // Content generation utilities
 class ContentGenerator {
