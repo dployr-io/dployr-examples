@@ -1,67 +1,71 @@
-// Dynamic newsletter data that fetches from the API
-let newsletterData = {
-    header: {
-        edition: "Edition nº 1",
-        date: "Thursday, September 1, 2014"
-    },
-    title: "Old County Times",
-    mainArticle: {
-        title: "Loading...",
-        content: "Content is being loaded...",
-        imageCaption: "Loading image..."
-    },
-    leftColumn: {
-        title: "Loading...",
-        content: "Content is being loaded..."
-    },
-    rightColumn: {
-        title: "Joke of the month",
-        content: "Loading...",
-        jokeLines: ["Loading..."],
-        note: "Note: For contributions to the jokes column, send your suggestion to humor@ourcompany.com.br (we will need it)."
-    },
-    comicSection: {
-        title: "Comic strip of the month",
-        caption: "Caption: Special thanks to Bia Franzoli for their amazing newspaper design inspiration"
-    },
-    contributeSection: {
-        title: "Contribute to Old County Times",
-        paragraphs: [
-            "Tell us about everyday events at the company: we accept reports, images, jokes and whatever else your creativity allows. Share with us the achievements and defeats in your area so that we can always be together on this journey.",
-            "Note: All contributions will be selected and evaluated by a mediator before entering the next edition."
-        ]
-    }
-};
+const heroImages = [
+    'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=400&fit=crop',
+];
+const comicImages = ['img/001.jpg', 'img/002.jpg', 'img/003.jpg', 'img/004.jpg', 'img/005.jpg'];
 
-// Fetch newsletter data from the API
-async function fetchNewsletterData() {
+function rand(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function render(data) {
+    const headerDivs = document.querySelectorAll('.header div');
+    headerDivs[0].textContent = data.header.edition;
+    headerDivs[1].textContent = data.header.date;
+
+    document.querySelector('.title').textContent = data.title;
+
+    const h2s = document.querySelectorAll('h2');
+    const ps = document.querySelectorAll('p');
+    h2s[0].textContent = data.mainArticle.title;
+    ps[0].textContent = data.mainArticle.content;
+    document.querySelector('.caption').textContent = data.mainArticle.imageCaption;
+
+    const cols = document.querySelectorAll('.column');
+    cols[0].querySelector('h2').textContent = data.leftColumn.title;
+    cols[0].querySelector('p').textContent = data.leftColumn.content;
+    cols[1].querySelector('h2').textContent = data.rightColumn.title;
+    cols[1].querySelectorAll('p')[0].textContent = data.rightColumn.content;
+    cols[1].querySelector('.joke-lines').innerHTML = data.rightColumn.jokeLines.join('<br>');
+    cols[1].querySelector('.note').textContent = data.rightColumn.note;
+
+    h2s[2].textContent = data.comicSection.title;
+    document.querySelector('.comic-caption').textContent = data.comicSection.caption;
+
+    const contrib = document.querySelector('.contribute');
+    contrib.querySelector('h2').textContent = data.contributeSection.title;
+    data.contributeSection.paragraphs.forEach((text, i) => {
+        const p = contrib.querySelectorAll('p')[i];
+        if (p) p.textContent = text;
+    });
+
+    const hero = document.querySelector('.meeting-photo');
+    hero.src = rand(heroImages);
+    hero.alt = 'Company meeting';
+
+    const comic = document.querySelector('.comic-strip');
+    comic.src = rand(comicImages);
+    comic.alt = 'Comic strip of the month';
+
+    setTimeout(() => {
+        document.querySelectorAll('.meeting-photo, .comic-strip').forEach(img => {
+            img.style.filter = 'grayscale(100%) contrast(1.2) brightness(0.9)';
+        });
+    }, 500);
+}
+
+async function load() {
     try {
-        const response = await fetch('/api/newsletter-data');
-        if (!response.ok) {
-            throw new Error('Failed to fetch newsletter data');
-        }
-        const newData = await response.json();
-        newsletterData = newData;
-        console.log('Newsletter data updated:', newsletterData);
-
-        // Trigger a re-render if the newsletter app is already initialized
-        if (window.app && typeof window.app.populateContent === 'function') {
-            window.app.populateContent();
-            window.app.loadRandomHeroImage();
-            window.app.loadRandomComicStrip();
-            setTimeout(() => window.app.applyBlackWhiteFilter(), 500);
-        }
-    } catch (error) {
-        console.error('Error fetching newsletter data:', error);
+        const res = await fetch('/api/newsletter-data');
+        if (!res.ok) throw new Error(res.statusText);
+        render(await res.json());
+    } catch (err) {
+        console.error('Failed to load newsletter data:', err);
     }
 }
 
-// Initialize data loading when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fetchNewsletterData);
-} else {
-    fetchNewsletterData();
-}
-
-// Refresh data every minute
-setInterval(fetchNewsletterData, 60000);
+load();
+setInterval(load, 60000);
