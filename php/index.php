@@ -137,25 +137,14 @@ if ($requestUri === '/api/newsletter-data' && $requestMethod === 'GET') {
     exit;
 }
 
-// Handle static file serving
-if (preg_match('/\.(js|css|jpg|jpeg|png|gif|ico)$/', $requestUri)) {
-    $staticPath = '../static' . $requestUri;
-    if (file_exists($staticPath)) {
-        $mimeTypes = [
-            'js' => 'application/javascript',
-            'css' => 'text/css',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'gif' => 'image/gif',
-            'ico' => 'image/x-icon'
-        ];
-        
-        $extension = pathinfo($staticPath, PATHINFO_EXTENSION);
-        $mimeType = $mimeTypes[$extension] ?? 'application/octet-stream';
-        
-        header("Content-Type: $mimeType");
-        readfile($staticPath);
+// Handle static file serving from local img/ directory
+if (preg_match('/^\/img\//', $requestUri)) {
+    $localPath = __DIR__ . $requestUri;
+    if (file_exists($localPath)) {
+        $extension = strtolower(pathinfo($localPath, PATHINFO_EXTENSION));
+        $mimeTypes = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif'];
+        header('Content-Type: ' . ($mimeTypes[$extension] ?? 'application/octet-stream'));
+        readfile($localPath);
         exit;
     }
 }
