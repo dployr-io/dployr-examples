@@ -4,7 +4,7 @@ import threading
 import time
 import os
 
-app = Flask(__name__, static_folder='../static')
+app = Flask(__name__, static_folder=None)
 
 class ContentGenerator:
     def __init__(self):
@@ -388,14 +388,9 @@ def home():
 def api_newsletter_data():
     return jsonify(current_newsletter_data)
 
-# Serve static files from the static directory
-@app.route('/js/<path:filename>')
-def serve_js(filename):
-    return send_from_directory('../static/js', filename)
-
 @app.route('/img/<path:filename>')
 def serve_img(filename):
-    return send_from_directory('../static/img', filename)
+    return send_from_directory(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img'), filename)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 3000))
