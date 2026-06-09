@@ -1,7 +1,7 @@
 <?php
 
 $port = $_ENV['PORT'] ?? 3000;
-$host = $_ENV['HOST'] ?? 'localhost';
+$host = $_ENV['HOST'] ?? '0.0.0.0';
 $documentRoot = $_ENV['DOCUMENT_ROOT'] ?? __DIR__;
 echo "Old County Times PHP server starting on http://$host:$port\n";
 echo "Document root: $documentRoot\n";

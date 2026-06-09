@@ -130,6 +130,14 @@ $contentGenerator = new ContentGenerator();
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
 $requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
+// Health check
+if ($requestUri === '/health') {
+    http_response_code(200);
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'ok']);
+    exit;
+}
+
 // Handle API endpoint
 if ($requestUri === '/api/newsletter-data' && $requestMethod === 'GET') {
     header('Content-Type: application/json');
