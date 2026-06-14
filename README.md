@@ -28,6 +28,6 @@ Each implementation directory contains its own README with specific setup instru
 4. Open http://localhost:3000 in your browser
 ---
 
-## Acknowledgments
+## Credits
 
-Special thanks to [Bia Franzoli](https://github.com/biafranzoi) for their beautiful newspaper design.
+Thanks to [Bia Franzoli](https://github.com/biafranzoi) for their newspaper design inspo.
